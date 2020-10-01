@@ -7,6 +7,107 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".2*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width=".7*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Choose log file to read from:"
+                       FontFamily="Consolas"
+                       Foreground="#383e42"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="16"
+                       Grid.ColumnSpan="2"/>
+
+            <ComboBox x:Name="LogFileNamesComboBox"
+                      Grid.Row="1"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Center"
+                      Width="200"
+                      Grid.ColumnSpan="2"/>
+
+            <Button x:Name="GetLogEntriesButton"
+                    Grid.Column="2"
+                    Grid.RowSpan="2"
+                    Content="Get entries"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Cursor="Hand"
+                    Foreground="#383e42"
+                    FontFamily="Consolas"
+                    FontSize="16"
+                    Click="GetLogEntriesButton_Click"/>
+        </Grid>
+
+        <TextBlock Text="Current log file:"
+                   FontFamily="Consolas"
+                   Foreground="#383e42"
+                   FontSize="16"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Grid.Column="1"
+                   Margin="20,0,0,0"/>
+
+        <TextBlock x:Name="CurrentLogFileTextBlock"
+                   Text="None"
+                   FontFamily="Consolas"
+                   Foreground="#383e42"
+                   FontSize="16"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Grid.Column="1"
+                   Margin="0,0,20,0"/>
+
+        <DataGrid x:Name="LogFileDataGrid"
+                  Grid.Row="1"
+                  Grid.ColumnSpan="2"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserReorderColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Date and time" Width="1*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Text" Value="{x:Null}"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Class" Width="1*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Text" Value="{x:Null}"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Error message" Width="1*">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Text" Value="{x:Null}"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

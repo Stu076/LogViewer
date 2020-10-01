@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -63,6 +65,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DataLayer\FileList\FileListProvider.cs" />
+    <Compile Include="DataLayer\File\DirectoryWalker.cs" />
+    <Compile Include="DataLayer\File\FileReader.cs" />
+    <Compile Include="DataLayer\LogEntry\LogEntriesProvider.cs" />
+    <Compile Include="DependencyContainer.cs" />
+    <Compile Include="DomainLayer\FileList\FileListInteractor.cs" />
+    <Compile Include="DomainLayer\FileList\IFileListProvider.cs" />
+    <Compile Include="DomainLayer\FileList\IFileListUseCase.cs" />
+    <Compile Include="DomainLayer\LogEntry\ILogEntriesProvider.cs" />
+    <Compile Include="DomainLayer\LogEntry\ILogEntriesUseCase.cs" />
+    <Compile Include="DomainLayer\LogEntry\LogEntriesInteractor.cs" />
+    <Compile Include="DomainLayer\LogEntry\LogEntry.cs" />
     <Compile Include="UILayer\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -94,9 +108,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataLayer\" />
-    <Folder Include="DomainLayer\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

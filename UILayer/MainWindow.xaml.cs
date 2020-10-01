@@ -24,5 +24,10 @@ namespace LogViewer
         {
             InitializeComponent();
         }
+
+        private void GetLogEntriesButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LogViewer.DomainLayer.LogEntry
 {
-    interface ILogEntriesUseCase
+    public interface ILogEntriesUseCase
     {
         List<LogEntry> FetchLogEntries(string logFileName);
     }

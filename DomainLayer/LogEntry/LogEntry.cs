@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LogViewer.DomainLayer.LogEntry
 {
-    class LogEntry
+    public class LogEntry
     {
         public string DateTime { get; set; }
         public string Class { get; set; }

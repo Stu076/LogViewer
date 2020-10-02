@@ -1,11 +1,11 @@
-﻿<Window x:Class="LogViewer.MainWindow"
+﻿<Window x:Class="LogViewer.UILayer.LogEntriesView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LogViewer"
+        xmlns:local="clr-namespace:LogViewer.UILayer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="LogEntriesView" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height=".2*"/>
@@ -42,6 +42,7 @@
                       VerticalAlignment="Center"
                       HorizontalAlignment="Center"
                       Width="200"
+                      ItemsSource="{Binding Path=FileNames, TargetNullValue={x:Null}}"
                       Grid.ColumnSpan="2"/>
 
             <Button x:Name="GetLogEntriesButton"
@@ -52,6 +53,8 @@
                     HorizontalAlignment="Center"
                     Cursor="Hand"
                     Foreground="#383e42"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
                     FontFamily="Consolas"
                     FontSize="16"
                     Click="GetLogEntriesButton_Click"/>
@@ -67,12 +70,12 @@
                    Margin="20,0,0,0"/>
 
         <TextBlock x:Name="CurrentLogFileTextBlock"
-                   Text="None"
+                   Text="{Binding Path=LogFileNamesComboBox.SelectedItem, TargetNullValue=None}"
                    FontFamily="Consolas"
                    Foreground="#383e42"
                    FontSize="16"
                    VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
+                   HorizontalAlignment="Right"
                    Grid.Column="1"
                    Margin="0,0,20,0"/>
 
@@ -87,7 +90,7 @@
                 <DataGridTextColumn Header="Date and time" Width="1*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Text" Value="{x:Null}"/>
+                            <Setter Property="Text" Value="{Binding Path=LogEntries.LogEntry.DateTime, TargetNullValue={x:Null}}"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
@@ -95,7 +98,7 @@
                 <DataGridTextColumn Header="Class" Width="1*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Text" Value="{x:Null}"/>
+                            <Setter Property="Text" Value="{Binding Path=LogEntries.LogEntry.Class, TargetNullValue={x:Null}}"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
@@ -103,7 +106,7 @@
                 <DataGridTextColumn Header="Error message" Width="1*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Text" Value="{x:Null}"/>
+                            <Setter Property="Text" Value="{Binding Path=LogEntries.LogEntry.ErrorMessage, TargetNullValue={x:Null}}"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>

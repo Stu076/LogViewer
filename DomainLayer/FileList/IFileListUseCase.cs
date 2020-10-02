@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LogViewer.DomainLayer.FileList
 {
-    interface IFileListUseCase
+    public interface IFileListUseCase
     {
 #nullable enable
         List<string> FetchFileList(string? dictionaryPath);

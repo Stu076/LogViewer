@@ -57,9 +57,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="UILayer\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="UILayer\LogEntriesView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -77,9 +77,8 @@
     <Compile Include="DomainLayer\LogEntry\ILogEntriesUseCase.cs" />
     <Compile Include="DomainLayer\LogEntry\LogEntriesInteractor.cs" />
     <Compile Include="DomainLayer\LogEntry\LogEntry.cs" />
-    <Compile Include="UILayer\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="UILayer\LogEntriesView.xaml.cs">
+      <DependentUpon>LogEntriesView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

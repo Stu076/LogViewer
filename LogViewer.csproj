@@ -70,6 +70,7 @@
     <Compile Include="DataLayer\File\FileReader.cs" />
     <Compile Include="DataLayer\LogEntry\LogEntriesProvider.cs" />
     <Compile Include="DependencyContainer.cs" />
+    <Compile Include="DomainLayer\FileList\FileData.cs" />
     <Compile Include="DomainLayer\FileList\FileListInteractor.cs" />
     <Compile Include="DomainLayer\FileList\IFileListProvider.cs" />
     <Compile Include="DomainLayer\FileList\IFileListUseCase.cs" />

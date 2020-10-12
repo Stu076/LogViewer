@@ -39,11 +39,12 @@
 
             <ComboBox x:Name="LogFileNamesComboBox"
                       Grid.Row="1"
+                      Grid.ColumnSpan="2"
                       VerticalAlignment="Center"
                       HorizontalAlignment="Center"
                       Width="200"
                       ItemsSource="{Binding Path=FileNames, TargetNullValue={x:Null}}"
-                      Grid.ColumnSpan="2"/>
+                      DisplayMemberPath="FileName"/>
 
             <Button x:Name="GetLogEntriesButton"
                     Grid.Column="2"
@@ -70,7 +71,7 @@
                    Margin="20,0,0,0"/>
 
         <TextBlock x:Name="CurrentLogFileTextBlock"
-                   Text="{Binding Path=LogFileNamesComboBox.SelectedItem, TargetNullValue=None}"
+                   Text="None"
                    FontFamily="Consolas"
                    Foreground="#383e42"
                    FontSize="16"
@@ -85,12 +86,13 @@
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
-                  CanUserReorderColumns="False">
+                  CanUserReorderColumns="False"
+                  ItemsSource="{Binding Path=LogEntries, TargetNullValue={x:Null}}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Date and time" Width="1*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Text" Value="{Binding Path=LogEntries.LogEntry.DateTime, TargetNullValue={x:Null}}"/>
+                            <Setter Property="Text" Value="{Binding Path=DateTime, TargetNullValue={x:Null}}"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
@@ -98,7 +100,7 @@
                 <DataGridTextColumn Header="Class" Width="1*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Text" Value="{Binding Path=LogEntries.LogEntry.Class, TargetNullValue={x:Null}}"/>
+                            <Setter Property="Text" Value="{Binding Path=Class, TargetNullValue={x:Null}}"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
@@ -106,7 +108,7 @@
                 <DataGridTextColumn Header="Error message" Width="1*">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
-                            <Setter Property="Text" Value="{Binding Path=LogEntries.LogEntry.ErrorMessage, TargetNullValue={x:Null}}"/>
+                            <Setter Property="Text" Value="{Binding Path=ErrorMessage, TargetNullValue={x:Null}}"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>

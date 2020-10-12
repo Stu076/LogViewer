@@ -1,20 +1,10 @@
-﻿using LogViewer.DomainLayer.FileList;
-using LogViewer.DomainLayer.LogEntry;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
+using LogViewer.DomainLayer.FileList;
+using LogViewer.DomainLayer.LogEntry;
 
 namespace LogViewer.UILayer
 {
@@ -26,7 +16,7 @@ namespace LogViewer.UILayer
     
     public partial class LogEntriesView : Window
     {
-        public ObservableCollection<string> FileNames { get; set; } = null;
+        public ObservableCollection<FileData> FileNames { get; set; } = null;
         public ObservableCollection<LogEntry> LogEntries { get; set; } = null;
 
         private readonly LogEntries logEntries;
@@ -39,37 +29,46 @@ namespace LogViewer.UILayer
             logEntries = new LogEntries(dependencies);
             fileList = new FileList(dependencies);
             FileNames = fileList.FileNames;
+            LogEntries = logEntries.LogData;
         }
 
         private void GetLogEntriesButton_Click(object sender, RoutedEventArgs e)
         {
-            string logFileName = LogFileNamesComboBox.SelectedItem as string;
-            LogEntries = new ObservableCollection<LogEntry>(logEntries.GetLogEntries(logFileName));
+            var logFileData = LogFileNamesComboBox.SelectedItem as FileData;
+            logEntries.SetLogEntries(logFileData.FilePath);
         }
     }
 
     class LogEntries
     {
         private readonly ILogEntriesDependencies dependencies;
+        private readonly ObservableCollection<LogEntry> _logEntries = new ObservableCollection<LogEntry>();
+
+        public ObservableCollection<LogEntry> LogData { get => _logEntries; }
 
         public LogEntries(ILogEntriesDependencies dependencies)
         {
             this.dependencies = dependencies;
         }
 
-        public List<LogEntry> GetLogEntries(string logFileName)
+        public void SetLogEntries(string logFilePath)
         {
-            return dependencies.LogEntriesUseCase.FetchLogEntries(logFileName);
+            _logEntries.Clear();
+            foreach (var logEntry in dependencies.LogEntriesUseCase.FetchLogEntries(logFilePath))
+            {
+                _logEntries.Add(logEntry);
+            }
         }
     }
 
     class FileList
     {
         private readonly ILogEntriesDependencies dependencies;
-        private ObservableCollection<string> fileNames;
-        private Timer fetchTimer;
+        private readonly ObservableCollection<FileData> _fileNames = new ObservableCollection<FileData>();
 
-        public ObservableCollection<string> FileNames { get => fileNames; }
+        public ObservableCollection<FileData> FileNames { 
+            get => _fileNames;
+        }
 
         public FileList(ILogEntriesDependencies dependencies)
         {
@@ -79,7 +78,7 @@ namespace LogViewer.UILayer
 
         private void InitTimer()
         {
-            fetchTimer = new Timer((e) =>
+            _ = new Timer((e) =>
             {
                 SetFileNames();
             }, null, TimeSpan.Zero, TimeSpan.FromSeconds(10));
@@ -87,7 +86,14 @@ namespace LogViewer.UILayer
 
         private void SetFileNames()
         {
-            fileNames = new ObservableCollection<string>(dependencies.FileListUseCase.FetchFileList(null));
+            App.Current.Dispatcher.Invoke((Action)delegate
+            {
+                _fileNames.Clear();
+                foreach (var item in dependencies.FileListUseCase.FetchFileList(null))
+                {
+                    _fileNames.Add(item);
+                }
+            });
         }
     }
 }

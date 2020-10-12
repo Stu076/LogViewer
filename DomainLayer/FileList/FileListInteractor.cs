@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace LogViewer.DomainLayer.FileList
 {
@@ -16,11 +12,22 @@ namespace LogViewer.DomainLayer.FileList
         }
 
 #nullable enable
-        public List<string> FetchFileList(string? dictionaryPath)
+        public List<FileData> FetchFileList(string? dictionaryPath)
         {
-            return fileListProvider.FetchFileList(dictionaryPath)
-                                   .Where(file => file.Contains("log"))
-                                   .ToList();
+            var fileList = new List<FileData>();
+
+            foreach (var file in fileListProvider.FetchFileList(dictionaryPath))
+            {
+                if (file.Contains("log"))
+                {
+                    fileList.Add(new FileData
+                    {
+                        FileName = file.Substring(file.LastIndexOf("\\") + 1),
+                        FilePath = file
+                    });
+                }
+            }
+            return fileList;
         }
 #nullable disable
     }

@@ -1,10 +1,7 @@
-﻿using LogViewer.DataLayer.File;
+﻿using System.Collections.Generic;
+
+using LogViewer.DataLayer.File;
 using LogViewer.DomainLayer.FileList;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogViewer.DataLayer.FileList
 {
